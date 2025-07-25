@@ -20,7 +20,7 @@
 									<!-- Handlebar loop to get every trip object -->
 									{{#each trips}}
 										<li>
-											<a href="/travel">
+											<a href="/api/trips/{{this.code}}">
 												<img src="images/{{this.image}}" alt="Img">
 											</a>
 											<h2>
