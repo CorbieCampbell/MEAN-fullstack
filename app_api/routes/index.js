@@ -7,13 +7,18 @@ const router = express.Router();
 const tripsController = require('../controllers/trips');
 
 // Define methods that route for trips endpoint :
-// GET method that routes the entier tripsList
 router
     .route('/trips')
-    .get(tripsController.tripsList);
-// GET method that routes the tripsFindByCode - requires search parameter
+    // GET method that routes the entier tripsList
+    .get(tripsController.tripsList)
+    // POST method that helps add a new trip to the database
+    .post(tripsController.tripsAddTrip);
+
 router
     .route('/trips/:tripCode')
-    .get(tripsController.tripsFindByCode);
+    // GET method that routes tripsFindByCode - requires parameter
+    .get(tripsController.tripsFindByCode)
+    // PUT method that routes tripsUpdateTrip - requires parameter
+    .put(tripsController.tripsUpdateTrip);
 
 module.exports = router;
