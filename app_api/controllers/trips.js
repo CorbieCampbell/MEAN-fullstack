@@ -127,7 +127,41 @@ const tripsUpdateTrip = async (req, res) => {
             .json(err);
     }
     else {
-        // Return newly added trip
+        // Return newly updated trip
+        return res
+            .status(201)
+            .json(q);
+    }
+
+    // Uncomment the following line to show results of operation on the console
+    // console.log(q);
+};
+
+// DELETE: /trips/:tripCode - Deletes a Trip
+// Regardless of the outcome, response must include HTML status code
+// & JSON message to the requesting client
+const tripsDeleteTrip = async (req, res) => {
+    
+    // Uncomment for debugging
+    console.log(req.params);
+    console.log(req.body);
+
+    console.log('Deleting trip with code:', req.params.tripCode);
+
+    const q = await Model
+        .findOneAndDelete(
+            // Parameter to find the trip to delete
+            { 'code' : req.params.tripCode }
+        ).exec();
+
+    if (!q) {
+        // Database returns no data
+        return res
+            .status(400)
+            .json({ message: 'Trip not found' });
+    }
+    else {
+        // Return successful deleted trip
         return res
             .status(201)
             .json(q);
@@ -141,5 +175,6 @@ module.exports = {
     tripsList,
     tripsFindByCode,
     tripsAddTrip,
-    tripsUpdateTrip
+    tripsUpdateTrip,
+    tripsDeleteTrip
 };
