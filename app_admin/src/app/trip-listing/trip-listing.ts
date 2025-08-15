@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { TripCard } from '../trip-card/trip-card';
 import { Trip } from '../models/trip';
 import { TripData } from '../services/trip-data';
+import { Authentication } from '../services/authentication';
 
 // Import for ADD functionality
 import { Router } from '@angular/router';
@@ -22,8 +22,14 @@ export class TripListing implements OnInit {
   trips!: Trip[];
   message: string = '';
 
-  constructor(private tripData: TripData, private router: Router) {
-    console.log('trip-listing constructor');
+  constructor(
+    private tripData: TripData,
+    private router: Router,
+    private authenticationService : Authentication
+  ) { console.log('trip-listing constructor'); }
+
+  public isLoggedIn() {
+    return this.authenticationService.isLoggedIn();
   }
 
   public addTrip(): void {

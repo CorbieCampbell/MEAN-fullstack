@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { TripData } from '../services/trip-data';
+import { Authentication } from '../services/authentication';
 
 @Component({
   selector: 'app-delete-trip',
@@ -14,8 +15,13 @@ export class DeleteTrip implements OnInit {
 
   constructor(
     private router: Router,
-    private tripService: TripData
+    private tripService: TripData,
+    private authenticationService : Authentication
   ) {}
+
+  public isLoggedIn() {
+    return this.authenticationService.isLoggedIn();
+  }
 
   ngOnInit(): void {
     this.tripCode = localStorage.getItem('tripCode'); // ✅ retrieve it
